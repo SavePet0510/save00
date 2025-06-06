@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SavePet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --verde-petroleo: #2F4F4F;
+            --bege-forte: #e0c9a1;
+            --marrom-escuro: #8B4513;
+            --verde-menta: #98FF98;
+            --branco: #FFFFFF;
+            --preto: #000000;
+            --azul-pastel: #6A7FDB;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bege-forte);
+            color: var(--preto);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Padrões de animação */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background-color: var(--bege-forte);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        .logo-placeholder {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--verde-petroleo), #3a5f5f);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .logo-placeholder i {
+            font-size: 2.5rem;
+            color: var(--bege-forte);
+        }
+
+        .project-title {
+            color: var(--verde-petroleo);
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-align: center;
+            flex-grow: 1;
+            margin: 0 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .back-btn {
+            display: inline-block;
+            background-color: var(--bege-forte);
+            color: var(--preto);
+            border: 2px solid var(--preto);
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .back-btn:hover {
+            background-color: var(--verde-menta);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        /* Conteúdo Principal - Página de Login */
+        .login-container {
+            max-width: 500px;
+            margin: 60px auto;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .welcome-title {
+            color: var(--verde-petroleo);
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .welcome-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--verde-petroleo), var(--marrom-escuro));
+            border-radius: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--marrom-escuro);
+            font-size: 1.1rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: var(--verde-petroleo);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(47, 79, 79, 0.2);
+        }
+
+        .forgot-password {
+            display: block;
+            text-align: right;
+            margin-top: 10px;
+            color: var(--azul-pastel);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password:hover {
+            color: var(--verde-petroleo);
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            background-color: var(--verde-petroleo);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 4px 10px rgba(47, 79, 79, 0.3);
+        }
+
+        .login-btn:hover {
+            background-color: #3a5f5f;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(47, 79, 79, 0.4);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 30px 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 2px dashed var(--marrom-escuro);
+            opacity: 0.3;
+        }
+
+        .divider-text {
+            padding: 0 15px;
+            color: var(--marrom-escuro);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .create-account {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .create-account h3 {
+            color: var(--verde-petroleo);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .signup-btn {
+            display: inline-block;
+            background-color: var(--bege-forte);
+            color: var(--preto);
+            border: 2px solid var(--preto);
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 300px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .signup-btn:hover {
+            background-color: var(--verde-menta);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        /* Elementos decorativos */
+        .pet-paws {
+            position: absolute;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .paw-1 {
+            top: 20%;
+            left: 5%;
+            font-size: 4rem;
+            transform: rotate(-20deg);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .paw-2 {
+            bottom: 15%;
+            right: 8%;
+            font-size: 5rem;
+            transform: rotate(25deg);
+            animation: float 7s ease-in-out infinite 0.5s;
+        }
+
+        .paw-3 {
+            top: 40%;
+            right: 12%;
+            font-size: 3.5rem;
+            transform: rotate(15deg);
+            animation: float 5.5s ease-in-out infinite 1s;
+        }
+
+        /* Rodapé */
+        footer {
+            background: var(--verde-petroleo);
+            color: var(--bege-forte);
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
+            border-top: 2px solid var(--marrom-escuro);
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .project-title {
+                margin: 20px 0;
+                font-size: 2rem;
+            }
+            
+            .logo-placeholder {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .login-container {
+                padding: 25px;
+                margin: 30px auto;
+            }
+            
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .pet-paws {
+                display: none;
+            }
+            
+            .back-btn {
+                margin-top: 15px;
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Patinhas decorativas -->
+    <div class="pet-paws paw-1">🐾</div>
+    <div class="pet-paws paw-2">🐾</div>
+    <div class="pet-paws paw-3">🐾</div>
+    
+    <header>
+        <a href="index.html" class="logo-container">
+            <div class="logo-placeholder">
+                <i class="fas fa-paw"></i>
+            </div>
+            <h1 class="project-title">SAVE PET</h1>
+        </a>
+        <a href="index.html" class="back-btn">Voltar</a>
+    </header>
+
+    <div class="login-container">
+        <h2 class="welcome-title">Bem vindo ao SavePet!</h2>
+        
+        <!-- Formulário de Login -->
+        <form>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Digite seu email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Senha</label>
+                <input type="password" id="password" placeholder="Digite sua senha" required>
+                <a href="#recover" class="forgot-password">Esqueci minha senha</a>
+            </div>
+            
+            <button type="submit" class="login-btn">Entrar</button>
+        </form>
+        
+        <div class="divider">
+            <span class="divider-text">ou</span>
+        </div>
+        
+        <!-- Área de criação de conta -->
+        <div class="create-account">
+            <h3>Ainda não tem uma conta?</h3>
+            <button class="signup-btn" onclick="showSignupForm()">Criar Conta</button>
+        </div>
+        
+        <!-- Formulário de Cadastro (inicialmente oculto) -->
+        <div id="signup-form" style="display: none;">
+            <form>
+                <div class="form-group">
+                    <label for="new-email">Email</label>
+                    <input type="email" id="new-email" placeholder="Digite seu email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="new-password">Senha</label>
+                    <input type="password" id="new-password" placeholder="Crie uma senha" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirm-password">Confirmar Senha</label>
+                    <input type="password" id="confirm-password" placeholder="Confirme sua senha" required>
+                </div>
+                
+                <button type="submit" class="login-btn">Criar Conta</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Modal de Recuperação de Senha -->
+    <div id="recover-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; justify-content: center; align-items: center;">
+        <div style="background: white; padding: 40px; border-radius: 20px; max-width: 500px; width: 90%; position: relative;">
+            <button onclick="closeModal()" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+            <h3 style="color: var(--verde-petroleo); margin-bottom: 20px; text-align: center;">Recuperar Senha</h3>
+            <p style="margin-bottom: 20px;">Digite seu email para receber um link de recuperação de senha:</p>
+            <div class="form-group">
+                <input type="email" id="recover-email" placeholder="Digite seu email" required style="width: 100%;">
+            </div>
+            <button class="login-btn" onclick="sendRecovery()">Enviar Link</button>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <p>© 2023 SAVE PET - Todos os direitos reservados | Ajude a salvar vidas de pets</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Função para mostrar o formulário de cadastro
+        function showSignupForm() {
+            document.getElementById('signup-form').style.display = 'block';
+            document.querySelector('.create-account').style.display = 'none';
+        }
+        
+        // Função para mostrar o modal de recuperação de senha
+        document.querySelector('.forgot-password').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('recover-modal').style.display = 'flex';
+        });
+        
+        // Função para fechar o modal
+        function closeModal() {
+            document.getElementById('recover-modal').style.display = 'none';
+        }
+        
+        // Função para enviar link de recuperação
+        function sendRecovery() {
+            const email = document.getElementById('recover-email').value;
+            if(email) {
+                alert(`Um link de recuperação foi enviado para: ${email}`);
+                closeModal();
+            } else {
+                alert('Por favor, digite um email válido');
+            }
+        }
+        
+        // Simular envio de formulário
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Ação realizada com sucesso!');
+            });
+        });
+    </script>
+</body>
+</html>
