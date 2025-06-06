@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial - SAVE PET</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --verde-petroleo: #2F4F4F;
+            --bege-forte: #e0c9a1;
+            --marrom-escuro: #8B4513;
+            --verde-menta: #98FF98;
+            --branco: #FFFFFF;
+            --preto: #000000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bege-forte);
+            color: var(--preto);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Padrões de animação */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background-color: var(--bege-forte);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-placeholder {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--verde-petroleo), #3a5f5f);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .logo-placeholder i {
+            font-size: 2.5rem;
+            color: var(--bege-forte);
+        }
+
+        .project-title {
+            color: var(--verde-petroleo);
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-align: center;
+            flex-grow: 1;
+            margin: 0 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .login-btn {
+            background-color: var(--bege-forte);
+            color: var(--preto);
+            border: 2px solid var(--preto);
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .login-btn:hover {
+            background-color: var(--verde-menta);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        /* Conteúdo Principal */
+        main {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 40px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        section {
+            margin-bottom: 60px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            color: var(--marrom-escuro);
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+            text-align: center;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--marrom-escuro), var(--verde-petroleo));
+            border-radius: 2px;
+        }
+
+        p {
+            font-size: 1.15rem;
+            margin-bottom: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        /* Elementos decorativos */
+        .pet-paws {
+            position: absolute;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .paw-1 {
+            top: 20%;
+            left: 5%;
+            font-size: 4rem;
+            transform: rotate(-20deg);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .paw-2 {
+            bottom: 15%;
+            right: 8%;
+            font-size: 5rem;
+            transform: rotate(25deg);
+            animation: float 7s ease-in-out infinite 0.5s;
+        }
+
+        .paw-3 {
+            top: 40%;
+            right: 12%;
+            font-size: 3.5rem;
+            transform: rotate(15deg);
+            animation: float 5.5s ease-in-out infinite 1s;
+        }
+
+        /* Rodapé */
+        footer {
+            background: var(--verde-petroleo);
+            color: var(--bege-forte);
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
+            border-top: 2px solid var(--marrom-escuro);
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .project-title {
+                margin: 20px 0;
+                font-size: 2rem;
+            }
+            
+            .logo-placeholder {
+                width: 60px;
+                height: 60px;
+            }
+            
+            main {
+                padding: 0 20px;
+                margin: 30px auto;
+            }
+            
+            section {
+                padding: 25px;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .pet-paws {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Patinhas decorativas -->
+    <div class="pet-paws paw-1">🐾</div>
+    <div class="pet-paws paw-2">🐾</div>
+    <div class="pet-paws paw-3">🐾</div>
+    
+    <header>
+        <div class="logo-container">
+            <div class="logo-placeholder">
+                <i class="fas fa-paw"></i>
+            </div>
+        </div>
+        <h1 class="project-title">SAVE PET</h1>
+        <a href="login.html"><button class="login-btn">Fazer Login</button></a>
+    </header>
+
+    <main>
+        <section class="project-description">
+            <h2>Quer conhecer o nosso projeto?</h2>
+            <p>Nossa plataforma é um site que ajuda tutores de pets em emergências, fornecendo um suporte técnico! Nosso projeto terá um mapa que vai localizar clínicas veterinárias 24H. Também temos dicas de procedimentos de primeiros socorros básicos, e também vídeos explicativos para ensinar comandos básicos.</p>
+        </section>
+
+        <section class="project-objective">
+            <h2>Qual o nosso objetivo?</h2>
+            <p>Esse site tem como objetivo orientar e ajudar tutores de pets a agirem de forma correta em casos de emergência, fornecendo recursos rápidos e confiáveis quando mais precisam.</p>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <p>© 2023 SAVE PET - Todos os direitos reservados | Ajude a salvar vidas de pets</p>
+        </div>
+    </footer>
+</body>
+</html>
